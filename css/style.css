@@ -1,0 +1,308 @@
+/* ===== FAIXA SUPERIOR FIXA (aparece em todas as páginas) =====
+   Coloque sua imagem em: /imagens/faixa-de-cima-topo.png
+   OBS: como o arquivo CSS está em /css, usamos ../imagens/ para subir um nível.
+*/
+:root {
+  --stripe-height: 72px; /* ajuste a altura da faixa (px) conforme a sua imagem */
+}
+
+/* faixa fixa no topo */
+.top-stripe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--stripe-height);
+  background-image: url("../css/imagens/ppppppppppppp11.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* ou "contain" se preferir manter aspecto */
+  z-index: 50; /* acima da maioria dos elementos */
+  pointer-events: none; /* evita que a faixa bloqueie cliques — se quiser clique, tire esta linha */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+//*foto do produto 
+
+/* área central entre a faixa e o fim da janela */
+.content-center {
+  min-height: calc(
+    100vh - var(--stripe-height)
+  ); /* ocupa toda a altura restante */
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center; /* centraliza vertical */
+  padding: 20px; /* margem interna opcional */
+  box-sizing: border-box;
+}
+
+/* imagem do produto responsiva */
+.produto-imagem {
+  max-width: 520px; /* largura máxima que você quer */
+  width: 90%; /* em telas pequenas ocupa 90% */
+  height: auto;
+  border-radius: 8px; /* opcional */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* opcional */
+}
+body {
+  padding-top: var(--stripe-height);
+}
+
+/* empurra o conteúdo para baixo para não ficar escondido pela faixa */
+body {
+  padding-top: var(
+    --stripe-height
+  ); /* importante: adiciona espaço conforme a altura da faixa */
+}
+
+/* Se preferir que apenas as páginas específicas tenham a faixa, adicione .has-stripe no <body> e use
+   .has-stripe { padding-top: var(--stripe-height); } e .has-stripe .top-stripe { ... }  */
+
+/* css/style.css
+   Use Ctrl+/ para comentar/descomentar blocos no VS Code.
+*/
+
+/* reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fdfdfd;
+}
+
+/* -------------------------------------
+   Fundo que cobre toda a tela
+   - .bg-full é a camada de fundo fixa (por baixo do conteúdo)
+   - #bg1 e #bg2 recebem as imagens diferentes
+   ------------------------------------- */
+.bg-full {
+  position: fixed; /* fica fixo enquanto o usuário rola */
+  inset: 0; /* top:0; left:0; right:0; bottom:0; */
+  background-size: cover; /* cobre toda a tela sem distorcer */
+  background-position: center;
+  z-index: -1; /* fica atrás de todo conteúdo */
+}
+
+/* ====== CAMINHOS DAS IMAGENS ======
+   Ajuste os nomes abaixo conforme as imagens que você colocou em /imagens
+   Se suas imagens estão no mesmo nível, use: url('imagens/pagina1.jpg')
+*/
+#bg1 {
+  background-image: url("../imagens/pagina1.jpg");
+}
+
+#bg2 {
+  background-image: url("../imagens/pagina2.jpg");
+}
+
+/* -------------------------------------
+   BOTÃO AZUL CENTRAL (Página 1)
+   - position: fixed => ele acompanha a tela quando rola
+   - transform: translate(-50%,-50%) => centraliza perfeitamente
+   - box-shadow usado como "margem azul" ao redor do botão
+   ------------------------------------- */
+/* garante que o container posicione imagem em cima e botão abaixo, centralizados */
+.container-produto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* centraliza HORIZONTAL (importante) */
+  justify-content: flex-start;
+  gap: 18px;              /* espaço entre imagem e botão */
+  width: 100%;
+}
+
+/* botão embaixo da imagem: arredondado, com "margem" azul (halo) */
+.btn-abaixo {
+  display: inline-block;
+  padding: 12px 34px;
+  border-radius: 14px;                             /* borda arredondada */
+  background: #2563eb;                             /* cor de fundo */
+  color: #ffffff;                                  /* cor do texto */
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 6px;                                 /* distancia da imagem */
+  transition: transform .12s ease, box-shadow .12s ease;
+  z-index: 10;
+  /* "margem azul" / halo ao redor do botão */
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.08),                   /* sombra suave */
+    0 0 0 8px rgba(37,99,235,0.10);                /* halo azul leve */
+  border: none;
+}
+
+/* efeito hover */
+.btn-abaixo:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.12),
+    0 0 0 10px rgba(37,99,235,0.12);
+}
+
+/* --------- Opcional: centralizar também VERTICALMENTE ---------
+   Se quiser o botão (e a imagem) absolutamente no centro da tela,
+   ajuste o container para justificar ao centro (vertical):
+.content-center { 
+  min-height: calc(100vh - var(--stripe-height));
+  display:flex;
+  justify-content:center;  <- altera para center para centralizar vertical
+  align-items:center;
+}
+*/
+  /* "margem azul" — efeito de halo/borda ao redor do botão */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.92);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+.btn-center:hover {
+  transform: translate(-50%, -50%) scale(1.03);
+  box-shadow: 0 0 0 8px rgba(30, 103, 240, 0.89);
+}
+
+/* -------------------------------------
+   Estilo para conteúdo da página 2
+   ------------------------------------- */
+.overlay-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+}
+.overlay-content h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+.overlay-content p {
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+/* botão secundário (Voltar) */
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 26px;
+  border-radius: 8px;
+  background: rgb(43, 21, 236);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(54, 40, 255, 0.94);
+  font-weight: 600;
+}
+
+/* responsividade simples */
+@media (max-width: 640px) {
+  .btn-center {
+    padding: 12px 22px;
+    font-size: 16px;
+  }
+  .overlay-content h1 {
+    font-size: 24px;
+  }
+  /* ===== product info styles (cole no fim do style.css) ===== */
+
+.product-info {
+  max-width: 900px;
+  margin: 18px auto 48px;    /* distância da imagem e do resto da página */
+  padding: 0 18px;
+  color: #222;
+  line-height: 1.45;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* condição e título */
+.product-condition {
+  color: #6b6b6b;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.product-title {
+  font-size: 18px;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+  color: #111;
+}
+
+/* linha do preço com destaque */
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.price {
+  font-size: 32px;              /* preço grande */
+  font-weight: 600;
+  color: #000000;               /* verde escuro para destaque do preço */
+}
+.price-old {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* parcelas */
+.installments {
+  color: #2b6ef6;               /* azul leve para parcelas */
+  margin: 6px 0 12px 0;
+  font-weight: 600;
+}
+
+/* destaque / link */
+.highlight-link {
+  color: #0a7a3a;
+  text-decoration: none;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* badge frete (verde) */
+.badge.shipping {
+  display: inline-block;
+  background: #e6fbef;          /* fundo claro */
+  color: #0a7a3a;               /* texto verde */
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin: 8px 0 12px 0;
+}
+
+/* textos menores de info/entrega */
+.delivery, .calc-delivery {
+  color: #444;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* ajuste da imagem do produto (espaço da faixa + estilo) */
+.produto-imagem {
+  display: block;
+  margin: 8px auto 18px auto; /* margem superior e inferior (ajuste se precisar) */
+  max-width: 520px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* responsivo: reduzir tamanhos em telas pequenas */
+@media (max-width: 640px) {
+  .price { font-size: 26px; }
+  .product-title { font-size: 16px; }
+  .product-info { padding: 0 12px; }
+  .produto-imagem { max-width: 92%; margin-top: 6px; }
+}
+}

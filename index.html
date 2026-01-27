@@ -1,0 +1,70 @@
+<!-- index.html
+     Abra no VS Code e para comentar/descomentar seleções use Ctrl + / (Windows) ou Cmd + / (Mac)
+-->
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Página 1 — Fundo imagem + botão</title>
+
+    <!-- link pro CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="top-stripe"></header>
+    <div></div>
+    <p class="product-condition">Recondicionado | +50 vendidos</p>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <h1 class="product-title">Ps3 Playstation 3 + 45 Jogos + 2 Controles</h1>
+    <header class="top-stripe"></header>
+
+    <img
+      src="css/imagens/PS3Versions.png"
+      alt="Imagem do Produto"
+      class="produto-imagem"
+    />
+
+    <section class="product-info">
+      <!-- preço destacado -->
+      <div class="price-row">
+        <span class="price">R$ 1.349</span>
+        <!-- remova a linha abaixo se não quiser preço riscado -->
+        <span class="price-old">R$ 2.499</span>
+      </div>
+
+      <p class="installments">10x R$ <strong>134,90</strong> sem juros</p>
+
+      <p class="payment-link highlight-link">Ver os meios de pagamento</p>
+
+      <p class="badge shipping"><strong>FRETE GRÁTIS</strong></p>
+
+      <p class="delivery">Saiba os prazos de entrega e as formas de envio.</p>
+
+      <p class="calc-delivery">Calcular o prazo de entrega</p>
+    </section>
+    <!--
+    Background: a DIV com id="bg1" é que recebe a imagem de fundo no CSS.
+    (Procure no css: #bg1 { background-image: url('../imagens/pagina1.jpg'); } )
+    Se quiser mudar a imagem, altere o caminho no CSS ou substitua o arquivo em /imagens.
+  -->
+    <div id="bg1" class="bg-full"></div>
+
+    <!--
+    BOTÃO centralizado:
+    - O botão foi criado como <a> para navegar para a segunda página (pagina2.html).
+    - Ele fica "fixo" (posicionamento fixe) e acompanha a tela ao rolar.
+    - A "margem azul" em volta é criada por box-shadow (como borda/halo).
+    -->
+    <header class="top-stripe"></header>
+
+    <div class="container-produto">
+      <a href="pagina2.html" class="btn-abaixo">Comprar</a>
+    </div>
+    <!-- opcional: script.js se for estender com JS -->
+    <!-- <script src="js/script.js"></script> -->
+  </body>
+</html>
