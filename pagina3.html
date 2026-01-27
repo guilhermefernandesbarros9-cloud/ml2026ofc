@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Página 2 — Continuação</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header com faixa + logo (mesma usada nas outras páginas) -->
+    <header class="top-stripe">
+      <img src="css/imagens/faixa-de-cima-topo.png" />
+    </header>
+    <header class="top-stripe">
+      <img src="css/imagens/logo.png" alt="Logo" class="logo-topo" />
+    </header>
+
+    <main class="content-center">
+      <div
+        class="payment-wrap"
+        style="
+          width: 100%;
+          max-width: 900px;
+          padding: 18px;
+          box-sizing: border-box;
+        "
+      >
+        <h2 style="margin: 12px 0 18px; color: #222">
+          Como você prefere pagar?
+        </h2>
+
+        <!-- Opções de pagamento -->
+        <div class="payment-options">
+          <button class="payment-option" data-method="pix" aria-pressed="false">
+            <strong>Pix</strong>
+            <div class="small">Aprovação imediata</div>
+          </button>
+
+          <button
+            class="payment-option"
+            data-method="card"
+            aria-pressed="false"
+          >
+            <strong>Cartão de crédito</strong>
+            <div class="small">Adicionar cartão</div>
+          </button>
+        <!-- Área que muda conforme a opção -->
+        <div id="payment-detail" style="margin-top: 18px">
+          <!-- PIX (padrão oculto) -->
+          <div id="pix-area" class="pay-area hidden">
+            <p>
+              Gerar PIX instantâneo. Após clicar em "Finalizar compra" será
+              exibido o QR code (simulação).
+            </p>
+            <div class="pix-box">
+              <p>
+                <strong>Chave:</strong> 123e4567-e89b-12d3-a456-426614174000
+                (exemplo)
+              </p>
+              <small>Após pagamento via PIX, a confirmação é imediata.</small>
+            </div>
+          </div>
+
+          <!-- CARTÃO -->
+          <form id="card-form" class="pay-area hidden" onsubmit="return false;">
+            <label
+              >Nome (no cartão)
+              <input
+                type="text"
+                id="card-name"
+                placeholder="Seu nome completo"
+              />
+            </label>
+
+            <label
+              >Número do cartão
+              <input
+                type="text"
+                id="card-number"
+                inputmode="numeric"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+              />
+            </label>
+
+            <div class="row">
+              <label
+                >Validade
+                <input
+                  type="text"
+                  id="card-exp"
+                  placeholder="MM/AA"
+                  maxlength="5"
+                />
+              </label>
+              <label
+                >CVV
+                <input
+                  type="text"
+                  id="card-cvv"
+                  inputmode="numeric"
+                  maxlength="4"
+                  placeholder="123"
+                />
+              </label>
+            </div>
+          </form>
+
+          <!-- BOLETO -->
+          <div id="boleto-area" class="pay-area hidden">
+            <p>
+              Ao finalizar, será gerado um boleto para pagamento. Validade 3
+              dias.
+            </p>
+          </div>
+        </div>
+
+        <!-- Resumo e botão finalizar -->
+        <div class="payment-footer" style="margin-top: 22px">
+          <div class="order-summary">
+            <div>Resumo do pedido</div>
+            <div><strong>PS3 Playstation 3</strong> — R$ 1.349</div>
+          </div>
+
+          <div style="margin-top: 14px">
+            <button id="finalize-btn" class="btn-abaixo" disabled>
+              Finalizar compra
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- script local para ativar seleção e validação -->
+    <script>
+      (function () {
+        const options = document.querySelectorAll(".payment-option");
+        const pixArea = document.getElementById("pix-area");
+        const cardForm = document.getElementById("card-form");
+        const boletoArea = document.getElementById("boleto-area");
+        const finalizeBtn = document.getElementById("finalize-btn");
+
+        let selected = null;
+
+        function clearSelection() {
+          options.forEach((b) => {
+            b.classList.remove("selected");
+            b.setAttribute("aria-pressed", "false");
+          });
+          [pixArea, cardForm, boletoArea].forEach((el) =>
+            el.classList.add("hidden"),
+          );
+          finalizeBtn.disabled = true;
+          selected = null;
+        }
+
+        function showArea(method) {
+          if (method === "pix") pixArea.classList.remove("hidden");
+          if (method === "card") cardForm.classList.remove("hidden");
+          if (method === "boleto") boletoArea.classList.remove("hidden");
+        }
+
+        options.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            clearSelection();
+            btn.classList.add("selected");
+            btn.setAttribute("aria-pressed", "true");
+            selected = btn.dataset.method;
+            showArea(selected);
+            finalizeBtn.disabled = false;
+          });
+        });
+
+        // validação simples ao finalizar
+        finalizeBtn.addEventListener("click", () => {
+          if (!selected) return;
+          if (selected === "card") {
+            const name = document.getElementById("card-name").value.trim();
+            const number = document.getElementById("card-number").value.trim();
+            const exp = document.getElementById("card-exp").value.trim();
+            const cvv = document.getElementById("card-cvv").value.trim();
+            if (!name || !number || !exp || !cvv) {
+              alert("Preencha todos os dados do cartão.");
+              return;
+            }
+            // simulação de sucesso
+            alert(
+              "Pagamento com cartão simulado com sucesso! Redirecionando para confirmação (simulação).",
+            );
+            // aqui você poderia redirecionar para uma página de confirmação:
+            // window.location.href = 'confirmacao.html';
+            return;
+          }
+
+          if (selected === "pix") {
+            alert(
+              "PIX selecionado (simulação). Mostrar QR code / chave para pagamento.",
+            );
+            return;
+          }
+
+          if (selected === "boleto") {
+            alert(
+              "Boleto gerado (simulação). Em breve você receberá o arquivo do boleto.",
+            );
+            return;
+          }
+        });
+
+        // opcional: máscara simples do número do cartão (formato 4-4-4-4)
+        const cardNumber = document.getElementById("card-number");
+        if (cardNumber) {
+          cardNumber.addEventListener("input", (e) => {
+            let v = e.target.value.replace(/\D/g, "").slice(0, 16);
+            v = v.match(/.{1,4}/g)?.join(" ") || v;
+            e.target.value = v;
+          });
+        }
+
+        // máscara validade MM/AA
+        const cardExp = document.getElementById("card-exp");
+        if (cardExp) {
+          cardExp.addEventListener("input", (e) => {
+            let v = e.target.value.replace(/\D/g, "").slice(0, 4);
+            if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
+            e.target.value = v;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

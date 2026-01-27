@@ -8,15 +8,58 @@
   </head>
   <body>
     <!-- Mesma faixa fixa no topo -->
-    <header class="top-stripe" aria-hidden="true"></header>
+    <header class="top-stripe">
+      <img src="css/imagens/faixa-de-cima-topo.png" />
+    </header>
+    <header class="top-stripe">
+      <img src="css/imagens/logo.png" alt="Logo" class="logo-topo" />
+    </header>
 
     <!-- Exemplo de conteúdo central da página 2 -->
     <main class="content-center">
       <div class="overlay-content">
-        <h1>Bem-vindo à Página 2</h1>
-        <p>Coloque aqui texto adicional, formulários ou botões.</p>
-        <a href="index.html" class="btn-secondary">Voltar</a>
+        <a href="pagina3.html" class="btn-abaixo">continua</a>
       </div>
     </main>
   </body>
+  <!-- -------------------------
+  BLOCO: opções de entrega
+  Cole este bloco na pagina2.html (substitua o conteúdo atual da .overlay-content)
+------------------------- -->
+  <section class="delivery-choices">
+    <form id="delivery-form">
+      <div class="delivery-option">
+        <input
+          type="radio"
+          id="delivery-fast"
+          name="delivery"
+          value="chegara-amanha"
+        />
+        <label for="delivery-fast">
+          <div class="opt-left">
+            <div class="opt-title">Chegará Amanhã</div>
+            <div class="opt-sub">Entrega rápida</div>
+          </div>
+          <div class="opt-right">R$ 9,90</div>
+        </label>
+      </div>
+
+      <div class="delivery-option">
+        <input
+          type="radio"
+          id="delivery-standard"
+          name="delivery"
+          value="padrao"
+        />
+        <label for="delivery-standard">
+          <div class="opt-left">
+            <div class="opt-title">Padrão (3–5 dias)</div>
+            <div class="opt-sub">Mais barato</div>
+          </div>
+          <div class="opt-right">R$ 0,00</div>
+        </label>
+      </div>
+    </form>
+    >
+  </section>
 </html>

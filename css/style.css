@@ -7,18 +7,28 @@
 }
 
 /* faixa fixa no topo */
+.logo-topo {
+  position: absolute;          /* posiciona dentro do header */
+  top: 50%;                   /* centraliza verticalmente */
+  left: 20px;                 /* distância da borda esquerda */
+  transform: translateY(-50%); /* ajuste fino da centralização vertical */
+  height: 40px;               /* tamanho adequado do logo */
+  width: auto;
+  z-index: 100;               /* maior que o da faixa para ficar visível */
+}
+
 .top-stripe {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: var(--stripe-height);
-  background-image: url("../css/imagens/ppppppppppppp11.png");
+  background-image: url("../imagens/faixa-de-cima-topo.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* ou "contain" se preferir manter aspecto */
-  z-index: 50; /* acima da maioria dos elementos */
-  pointer-events: none; /* evita que a faixa bloqueie cliques — se quiser clique, tire esta linha */
+  background-size: cover;
+  z-index: 50;                /* menor que o logo */
+  pointer-events: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 //*foto do produto 
@@ -304,5 +314,135 @@ body {
   .product-title { font-size: 16px; }
   .product-info { padding: 0 12px; }
   .produto-imagem { max-width: 92%; margin-top: 6px; }
+}
+/* Payment UI */
+.payment-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.payment-option {
+  flex: 1 1 220px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s;
+}
+.payment-option .small { color:#666; font-size:13px; margin-top:6px; }
+.payment-option.selected {
+  border-color: #2563eb;
+  box-shadow: 0 10px 30px rgba(37,99,235,0.12);
+  transform: translateY(-4px);
+}
+
+/* payment detail areas */
+.pay-area.hidden { display: none; }
+.pay-area { background:#fff; border-radius:8px; padding:12px; border:1px solid #eee; box-shadow: 0 4px 14px rgba(0,0,0,0.03); }
+
+.pix-box { background:#f6fffa; border:1px solid #dff6e9; padding:10px; border-radius:6px; color:#0a7a3a; }
+
+/* card form */
+#card-form label { display:block; margin-bottom:10px; font-size:14px; color:#333; }
+#card-form input {
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  margin-top:6px;
+  box-sizing:border-box;
+}
+
+/* row (val+cvv) */
+#card-form .row { display:flex; gap:10px; }
+#card-form .row label { flex:1; }
+
+/* resumo e botão */
+.payment-footer { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.order-summary { background:#fff; border-radius:8px; padding:12px; width:100%; border:1px solid #eee; }
+
+/* botão finalizar = já está com .btn-abaixo no seu css, se quiser deixa desse jeito */
+#finalize-btn[disabled] { opacity:0.5; cursor:not-allowed; }
+
+/* ===== estilos para opções de entrega (Página 2) ===== */
+.delivery-choices {
+  width: 100%;
+  max-width: 900px;
+  margin: 18px auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+
+.delivery-option {
+  margin-bottom: 12px;
+}
+
+/* escondemos o input real e estilizamos o label */
+.delivery-option input[type="radio"] {
+  display: none;
+}
+
+/* label como cartão clicável */
+.delivery-option label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e7e7e7;
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .12s ease;
+}
+
+/* bolinha custom (antes do conteúdo do label) */
+.delivery-option label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cfcfcf;
+  background: #fff;
+  margin-right: 12px;
+  box-sizing: border-box;
+}
+
+/* texto do lado esquerdo (título + subtítulo) */
+.opt-left { display: flex; flex-direction: column; text-align: left; }
+.opt-title { font-weight: 700; color: #111; }
+.opt-sub { font-size: 13px; color: #666; margin-top: 4px; }
+
+/* preço do lado direito */
+.opt-right { font-weight: 700; color: #111; min-width: 70px; text-align: right; }
+
+/* estado selecionado: borda verde e bolinha preenchida */
+.delivery-option input[type="radio"]:checked + label {
+  border-color: #0a7a3a;
+  box-shadow: 0 10px 26px rgba(10,122,58,0.06);
+  transform: translateY(-3px);
+}
+.delivery-option input[type="radio"]:checked + label::before {
+  background: #0a7a3a;
+  border-color: #0a7a3a;
+  box-shadow: 0 0 0 6px rgba(10,122,58,0.06);
+}
+
+/* status hover para melhorar UX */
+.delivery-option label:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+
+/* botão continuar: desabilitado e habilitado */
+.btn-abaixo.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.btn-abaixo { /* já existe no seu CSS, este garante aparência padronizada */
+  margin-top: 16px;
+  display: inline-block;
 }
 }
